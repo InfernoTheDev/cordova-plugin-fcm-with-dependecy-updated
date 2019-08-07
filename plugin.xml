@@ -17,7 +17,7 @@
   specific language governing permissions and limitations
   under the License.
 -->
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-fcm-with-dependecy-updated-voova" version="2.4.9">
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-fcm-with-dependecy-updated-voova" version="2.5.0">
     <name>Cordova FCM Push Plugin</name>
     <description>Google Firebase Cloud Messaging Cordova Push Plugin fork with dependecy updated</description>
     <license>MIT</license>
@@ -84,11 +84,9 @@
 
 		<source-file src="src/android/colors.xml" target-dir="res/values" />
 
-		<config-file target="colors.xml" parent="/manifest/application/app/src/main/res/values">
-			<resources>
-				<color name="primary_color">$PRIMARY_COLOR</color>
-				<color name="secondary_color">$SECONDARY_COLOR</color>
-			</resources>
+		<config-file target="res/values/colors.xml" parent="/resources">
+			<color name="primary_color">$PRIMARY_COLOR</color>
+			<color name="secondary_color">$SECONDARY_COLOR</color>
 		</config-file>
 
     </platform>
