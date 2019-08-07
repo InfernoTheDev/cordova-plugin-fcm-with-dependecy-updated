@@ -47,3 +47,7 @@ Temporary Items
 .apdisk
 
 npm-debug.log
+
+src/android/.gradle
+src/android/.idea
+src/android/android.iml

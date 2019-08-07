@@ -23,17 +23,28 @@
     <license>MIT</license>
     <keywords>notifications, push, firebase, fcm, ios, android, cordova, plugin</keywords>
 
+	<preference name="PRIMARY_COLOR" default="#014CA9"/>
+	<preference name="SECONDARY_COLOR" default="#FFFFFF"/>
+	<preference name="LOGO_PATH" default="popup_logo.png"/>
+
     <js-module src="www/FCMPlugin.js" name="FCMPlugin">
 	<clobbers target="FCMPlugin" />
     </js-module>
 
     <engines>
-	<engine name="cordova-android" version=">=4.0.0" />
+		<engine name="cordova-android" version=">=4.0.0" />
     </engines>
 
     <!-- ANDROID CONFIGURATION -->
     <platform name="android">
 		<config-file target="AndroidManifest.xml" parent="/manifest/application">
+			<activity
+				android:excludeFromRecents="true"
+				android:launchMode="singleInstance"
+				android:name="com.gae.scaffolder.plugin.MyPopup"
+				android:showOnLockScreen="false"
+				android:taskAffinity=".MyPopup"
+				android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar" />
 			<activity android:exported="true" android:name="com.gae.scaffolder.plugin.FCMPluginActivity" android:launchMode="singleTop">
 				<intent-filter>
 					<action android:name="FCM_PLUGIN_ACTIVITY" />
@@ -53,9 +64,16 @@
 		</config-file>
 		<config-file target="res/xml/config.xml" parent="/*">
 			<feature name="FCMPlugin" >
-					<param name="android-package" value="com.gae.scaffolder.plugin.FCMPlugin"/>
-					<param name="onload" value="true" />
-				</feature>
+				<param name="android-package" value="com.gae.scaffolder.plugin.FCMPlugin"/>
+				<param name="onload" value="true" />
+			</feature>
+		</config-file>
+
+		<config-file target="res/values/colors.xml" parent="/*">
+			<resources>
+				<color name="primary_color">$PRIMARY_COLOR</color>
+				<color name="secondary_color">$SECONDARY_COLOR</color>
+			</resources>
 		</config-file>
 
         <framework src="com.google.firebase:firebase-core:10.+" />
@@ -67,6 +85,9 @@
 		<source-file src="src/android/MyFirebaseMessagingService.java" target-dir="src/com/gae/scaffolder/plugin" />
 		<source-file src="src/android/MyFirebaseInstanceIDService.java" target-dir="src/com/gae/scaffolder/plugin" />
 		<source-file src="src/android/FCMPluginActivity.java" target-dir="src/com/gae/scaffolder/plugin" />
+		<source-file src="src/android/MyPopup.java" target-dir="src/com/gae/scaffolder/plugin" />
+		<source-file src="src/android/my_popup.xml" target-dir="res/layout" />
+		<source-file src="$LOGO_PATH" target-dir="res/drawable" />
     </platform>
 
     <!-- IOS CONFIGURATION -->

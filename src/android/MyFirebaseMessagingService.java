@@ -56,6 +56,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         
         Log.d(TAG, "\tNotification Data: " + data.toString());
         FCMPlugin.sendPushPayload( data );
+        openPopup( data );
         //sendNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody(), remoteMessage.getData());
     }
     // [END receive_message]
@@ -87,5 +88,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+    }
+
+    private void openPopup(Map<String, Object> data) {
+        Intent intent = new Intent(getApplicationContext(), MyPopup.class);
+        //taskAffinity
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        for (String key : data.keySet()) {
+            intent.putExtra(key, data.get(key).toString());
+        }
+        getApplicationContext().startActivity(intent, intent.getExtras());
     }
 }
