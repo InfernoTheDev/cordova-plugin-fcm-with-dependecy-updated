@@ -87,7 +87,7 @@
 		<source-file src="src/android/FCMPluginActivity.java" target-dir="src/com/gae/scaffolder/plugin" />
 		<source-file src="src/android/MyPopup.java" target-dir="src/com/gae/scaffolder/plugin" />
 		<source-file src="src/android/my_popup.xml" target-dir="res/layout" />
-		<source-file src="$LOGO_PATH" target-dir="res/drawable" />
+		<source-file src=$LOGO_PATH target-dir="res/drawable" />
     </platform>
 
     <!-- IOS CONFIGURATION -->
