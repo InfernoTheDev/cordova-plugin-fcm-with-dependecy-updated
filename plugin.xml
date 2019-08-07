@@ -17,7 +17,7 @@
   specific language governing permissions and limitations
   under the License.
 -->
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-fcm-with-dependecy-updated-voova" version="2.4.4">
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-fcm-with-dependecy-updated-voova" version="2.4.5">
     <name>Cordova FCM Push Plugin</name>
     <description>Google Firebase Cloud Messaging Cordova Push Plugin fork with dependecy updated</description>
     <license>MIT</license>
@@ -69,13 +69,6 @@
 			</feature>
 		</config-file>
 
-		<config-file target="res/values/colors.xml" parent="/*">
-			<resources>
-				<color name="primary_color">$PRIMARY_COLOR</color>
-				<color name="secondary_color">$SECONDARY_COLOR</color>
-			</resources>
-		</config-file>
-
         <framework src="com.google.firebase:firebase-core:10.+" />
         <framework src="com.google.firebase:firebase-messaging:10.+" />
 
@@ -87,8 +80,15 @@
 		<source-file src="src/android/FCMPluginActivity.java" target-dir="src/com/gae/scaffolder/plugin" />
 		<source-file src="src/android/MyPopup.java" target-dir="src/com/gae/scaffolder/plugin" />
 		<source-file src="src/android/my_popup.xml" target-dir="res/layout" />
-		<source-file src="src/android/colors.xml" target-dir="res/values" />
 		<source-file src="popup_logo.png" target-dir="res/drawable" />
+		
+		<source-file src="src/android/colors.xml" target-dir="res/values" />
+		<config-file target="res/values/colors.xml" parent="/*">
+			<resources>
+				<color name="primary_color">$PRIMARY_COLOR</color>
+				<color name="secondary_color">$SECONDARY_COLOR</color>
+			</resources>
+		</config-file>
     </platform>
 
     <!-- IOS CONFIGURATION -->
