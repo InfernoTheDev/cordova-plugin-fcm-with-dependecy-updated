@@ -17,15 +17,15 @@
   specific language governing permissions and limitations
   under the License.
 -->
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-fcm-with-dependecy-updated-voova" version="2.4.2">
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-fcm-with-dependecy-updated-voova" version="2.4.3">
     <name>Cordova FCM Push Plugin</name>
     <description>Google Firebase Cloud Messaging Cordova Push Plugin fork with dependecy updated</description>
     <license>MIT</license>
     <keywords>notifications, push, firebase, fcm, ios, android, cordova, plugin, voova, popup, dialog</keywords>
+	<repo>https://github.com/InfernoTheDev/cordova-plugin-fcm-with-dependecy-updated</repo>
 
 	<preference name="PRIMARY_COLOR" default="#014CA9"/>
 	<preference name="SECONDARY_COLOR" default="#FFFFFF"/>
-	<preference name="LOGO_PATH" default="popup_logo.png"/>
 
     <js-module src="www/FCMPlugin.js" name="FCMPlugin">
 	<clobbers target="FCMPlugin" />
@@ -87,7 +87,7 @@
 		<source-file src="src/android/FCMPluginActivity.java" target-dir="src/com/gae/scaffolder/plugin" />
 		<source-file src="src/android/MyPopup.java" target-dir="src/com/gae/scaffolder/plugin" />
 		<source-file src="src/android/my_popup.xml" target-dir="res/layout" />
-		<source-file src=$LOGO_PATH target-dir="res/drawable" />
+		<source-file src="popup_logo.png" target-dir="res/drawable" />
     </platform>
 
     <!-- IOS CONFIGURATION -->
