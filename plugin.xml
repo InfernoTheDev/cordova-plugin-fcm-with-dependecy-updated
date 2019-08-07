@@ -21,7 +21,7 @@
     <name>Cordova FCM Push Plugin</name>
     <description>Google Firebase Cloud Messaging Cordova Push Plugin fork with dependecy updated</description>
     <license>MIT</license>
-    <keywords>notifications, push, firebase, fcm, ios, android, cordova, plugin</keywords>
+    <keywords>notifications, push, firebase, fcm, ios, android, cordova, plugin, voova, popup, dialog</keywords>
 
 	<preference name="PRIMARY_COLOR" default="#014CA9"/>
 	<preference name="SECONDARY_COLOR" default="#FFFFFF"/>
