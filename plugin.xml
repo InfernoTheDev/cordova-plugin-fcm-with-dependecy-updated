@@ -83,7 +83,7 @@
 		<source-file src="popup_logo.png" target-dir="res/drawable" />
 
 		<source-file src="src/android/colors.xml" target-dir="res/values" />
-		<config-file target="res/values/colors.xml" parent="/manifest/application">
+		<config-file target="res/values/colors.xml" parent="/manifest/application/res/values">
 			<resources>
 				<color name="primary_color">$PRIMARY_COLOR</color>
 				<color name="secondary_color">$SECONDARY_COLOR</color>
