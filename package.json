@@ -1,15 +1,15 @@
 {
   "version": "2.4.0",
-  "name": "cordova-plugin-fcm-with-dependecy-updated",
+  "name": "cordova-plugin-fcm-with-dependecy-updated-voova",
   "cordova_name": "Cordova FCM Push Plugin",
   "description": "Google Firebase Cloud Messaging Cordova Push Plugin fork with dependecy updated",
   "license": "MIT",
   "repo": "",
   "issue": "",
-  "author": "André Augusto Tissot",
+  "author": "illnino",
   "repository": {
     "type": "git",
-    "url": "https://github.com/andrehtissot/cordova-plugin-fcm-with-dependecy-updated"
+    "url": "https://github.com/InfernoTheDev/cordova-plugin-fcm-with-dependecy-updated"
   },
   "keywords": [
     "ecosystem:cordova",
@@ -21,7 +21,10 @@
     "fcm",
     "ios",
     "android",
-    "cordova"
+    "cordova",
+    "popup",
+    "dialog",
+    "voova"
   ],
   "platforms": [
     "android",
