@@ -9,24 +9,25 @@
 
   <LinearLayout
       android:orientation="vertical"
-      android:layout_width="match_parent"
+      android:layout_width="360dp"
       android:layout_height="90dp"
       android:background="@color/secondary_color"
       android:layout_marginTop="10dp"
       android:layout_marginBottom="10dp"
-      android:layout_marginRight="36dp"
-      android:layout_marginLeft="36dp">
+      >
 
     <ImageView
         android:src="@drawable/popup_logo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/imageView"/>
+        android:id="@+id/imageView"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"/>
   </LinearLayout>
 
   <LinearLayout
       android:orientation="vertical"
-      android:layout_width="match_parent"
+      android:layout_width="360dp"
       android:layout_height="match_parent"
       android:layout_weight="1"
       android:background="@color/primary_color">
@@ -41,27 +42,28 @@
         android:hint="YOUR DRIVER ARRIVED!"/>
 
     <ScrollView
-        android:layout_width="match_parent"
+        android:layout_width="360dp"
         android:layout_height="match_parent"
         android:fillViewport="true">
 
       <LinearLayout
-          android:layout_width="match_parent"
+          android:layout_width="360dp"
           android:layout_height="wrap_content"
           android:orientation="vertical"
-          android:layout_marginLeft="10dp"
           android:layout_marginBottom="10dp"
-          android:layout_marginRight="10dp">
+          >
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="360dp"
             android:layout_height="wrap_content"
             android:id="@+id/msg_view"
             android:textColor="@color/secondary_color"
             android:textAlignment="center"
             android:autoText="false"
             android:singleLine="false"
-            android:hint="Your centent here"/>
+            android:hint="Your centent here"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
       </LinearLayout>
     </ScrollView>
 
@@ -69,7 +71,7 @@
 
   <LinearLayout
       android:orientation="vertical"
-      android:layout_width="match_parent"
+      android:layout_width="360dp"
       android:layout_height="wrap_content"
       android:background="@color/primary_color">
 
