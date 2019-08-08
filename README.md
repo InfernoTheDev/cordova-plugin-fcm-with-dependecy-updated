@@ -1,4 +1,17 @@
-# Google Firebase Cloud Messaging Cordova Push Plugin
+![npm downloads](https://img.shields.io/npm/dm/cordova-plugin-fcm-with-dependecy-updated-voova)
+![npm version](https://img.shields.io/npm/v/cordova-plugin-fcm-with-dependecy-updated-voova)
+
+## Authorship
+This is fork from https://github.com/andrehtissot/cordova-plugin-fcm-with-dependecy-updated.
+
+This fork has added custom notification dialog when recieve notification
+
+## Demo Preview
+![Demo Preview](demo_preview.png?raw=true)
+
+--------------------------------------------------------------------------------------------------
+
+# Google Firebase Cloud Messaging Cordova Push Plugin (Original)
 > Extremely easy plug&play push notification plugin for Cordova applications with Google Firebase FCM.
 
 [![npm downloads](https://img.shields.io/npm/dt/cordova-plugin-fcm-with-dependecy-updated.svg)](https://www.npmjs.com/package/cordova-plugin-fcm-with-dependecy-updated)
@@ -9,11 +22,6 @@
 [![GitHub stars](https://img.shields.io/github/stars/andrehtissot/cordova-plugin-fcm-with-dependecy-updated.svg)](https://github.com/andrehtissot/cordova-plugin-fcm-with-dependecy-updated/stargazers)
 [![Known Vulnerabilities](https://snyk.io/test/github/andrehtissot/cordova-plugin-fcm-with-dependecy-updated/badge.svg?targetFile=package.json)](https://snyk.io/test/github/andrehtissot/cordova-plugin-fcm-with-dependecy-updated?targetFile=package.json)
 [![DeepScan grade](https://deepscan.io/api/teams/3417/projects/5068/branches/39495/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=3417&pid=5068&bid=39495)
-
-## Authorship
-This is fork from https://github.com/andrehtissot/cordova-plugin-fcm-with-dependecy-updated.
-
-This fork has added custom notification dialog when recieve notification
 
 ## Authorship
 This is a fork from https://github.com/fechanique/cordova-plugin-fcm with behind-the-scenes improvements.
