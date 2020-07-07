@@ -9,7 +9,7 @@
 #import "FCMPlugin.h"
 #import <objc/runtime.h>
 #import <Foundation/Foundation.h>
-
+#import <AudioToolbox/AudioToolbox.h>
 #import "Firebase.h"
 
 #if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
@@ -117,11 +117,11 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
     // Print message ID.
     NSDictionary *userInfo = notification.request.content.userInfo;
     if (userInfo[kGCMMessageIDKey]) {
-        NSLog(@"Message ID 1: %@", userInfo[kGCMMessageIDKey]);
+        NSLog(@"Message ID App in Foreground: %@", userInfo[kGCMMessageIDKey]);
     }
     
     // Print full message.
-    NSLog(@"%@", userInfo);
+    NSLog(@"Foreground: %@", userInfo);
     
     NSError *error;
     NSDictionary *userInfoMutable = [userInfo mutableCopy];
@@ -140,24 +140,27 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
          withCompletionHandler:(void (^)())completionHandler {
     NSDictionary *userInfo = response.notification.request.content.userInfo;
     if (userInfo[kGCMMessageIDKey]) {
-        NSLog(@"Message ID 2: %@", userInfo[kGCMMessageIDKey]);
+        NSLog(@"Message ID After Tapped: %@", userInfo[kGCMMessageIDKey]);
     }
     
     // Print full message.
-    NSLog(@"aaa%@", userInfo);
+    NSLog(@"After Tapped: %@", userInfo);
     
     NSError *error;
     NSDictionary *userInfoMutable = [userInfo mutableCopy];
     
 
-        NSLog(@"New method with push callback: %@", userInfo);
-        
-        [userInfoMutable setValue:@(YES) forKey:@"wasTapped"];
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:userInfoMutable
-                                                           options:0
-                                                             error:&error];
-        NSLog(@"APP WAS CLOSED DURING PUSH RECEPTION Saved data: %@", jsonData);
-        lastPush = jsonData;
+    NSLog(@"New method with push callback: %@", userInfo);
+    
+    [userInfoMutable setValue:@(YES) forKey:@"wasTapped"];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:userInfoMutable
+                                                       options:0
+                                                         error:&error];
+    NSLog(@"APP WAS CLOSED DURING PUSH RECEPTION Saved data: %@", jsonData);
+    lastPush = jsonData;
+    
+    // Custom Popup
+    [self myPopup: userInfoMutable];
 
     
     completionHandler();
@@ -174,10 +177,11 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
 {
     // Short-circuit when actually running iOS 10+, let notification centre methods handle the notification.
     if (NSFoundationVersionNumber >= NSFoundationVersionNumber_iOS_9_x_Max) {
-        return;
+        NSLog(@"running iOS 10+ No skip 1");
+        //return;
     }
 
-    NSLog(@"Message ID: %@", userInfo[@"gcm.message_id"]);
+    NSLog(@"Message ID App in Background 1: %@", userInfo[@"gcm.message_id"]);
     
     NSError *error;
     NSDictionary *userInfoMutable = [userInfo mutableCopy];
@@ -201,7 +205,8 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
     // Short-circuit when actually running iOS 10+, let notification centre methods handle the notification.
     if (NSFoundationVersionNumber >= NSFoundationVersionNumber_iOS_9_x_Max) {
-        return;
+        NSLog(@"running iOS 10+, No skip 2");
+        //return;
     }
 
     // If you are receiving a notification message while your app is in the background,
@@ -209,10 +214,10 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
     // TODO: Handle data of notification
 
     // Print message ID.
-    NSLog(@"Message ID: %@", userInfo[@"gcm.message_id"]);
+    NSLog(@"Message ID App in Background 2: %@", userInfo[@"gcm.message_id"]);
 
     // Pring full message.
-    NSLog(@"%@", userInfo);
+    NSLog(@"App in Background 2:%@", userInfo);
     NSError *error;
 
     NSDictionary *userInfoMutable = [userInfo mutableCopy];
@@ -222,7 +227,6 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
     // UIApplicationStateInactive - app is transitioning from background to
     //                              foreground (user taps notification)
 
-    UIApplicationState state = application.applicationState;
     if (application.applicationState == UIApplicationStateActive
         || application.applicationState == UIApplicationStateInactive) {
         [userInfoMutable setValue:@(NO) forKey:@"wasTapped"];
@@ -234,12 +238,98 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 
     // app is in background
     }
-
+    
+    AudioServicesPlaySystemSound(1315);
+    
+    // Custom Popup
+    [self myPopup: userInfo];
+    
+    NSLog(@"ENDDD----");
     completionHandler(UIBackgroundFetchResultNoData);
 }
 // [END receive_message iOS < 10]
 // [END message_handling]
 
+- (void)myPopup:(NSDictionary *)userInfo
+{
+    
+    NSString *title = userInfo[@"aps"][@"alert"][@"title"];
+    NSString *body = userInfo[@"aps"][@"alert"][@"body"];
+    NSString *isTrackDriverPopup = userInfo[@"gcm.notification.isTrackDriverPopup"];
+    NSString *isRateDriverPopup = userInfo[@"gcm.notification.isRateDriverPopup"];
+    NSString *action = userInfo[@"gcm.notification.action"];
+    NSLog(@"====== MY POPUP ======");
+    NSLog(@"title: %@", title);
+    NSLog(@"body: %@", body);
+    NSLog(@"isTrackDriverPopup: %@", isTrackDriverPopup);
+    NSLog(@"isRateDriverPopup: %@", isRateDriverPopup);
+    NSLog(@"action: %@", action);
+    
+    if (title) {
+        // Alert UI Popup box
+        UIAlertController *alert = [UIAlertController
+                                    alertControllerWithTitle: title
+                                    message: body
+                                    preferredStyle: UIAlertControllerStyleAlert];
+        
+        UIAlertAction *btnOk = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            //button click event
+            NSMutableDictionary *mutableDictionaryJsonData = [userInfo mutableCopy];     //Make the dictionary mutable to change/add
+            mutableDictionaryJsonData[@"confirmButton"] =  @"true";
+            mutableDictionaryJsonData[@"title"] = userInfo[@"aps"][@"alert"][@"title"];
+            mutableDictionaryJsonData[@"body"] = userInfo[@"aps"][@"alert"][@"body"];
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:mutableDictionaryJsonData
+                                                               options:0
+                                                                 error:nil];
+            [FCMPlugin.fcmPlugin notifyOfMessage:jsonData];
+        }];
+        
+        UIAlertAction *btnTrackDriver = [UIAlertAction actionWithTitle:@"TRACK DRIVER" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            //button click event
+            NSMutableDictionary *mutableDictionaryJsonData = [userInfo mutableCopy];     //Make the dictionary mutable to change/add
+            mutableDictionaryJsonData[@"openTrackingTapped"] = @"true";
+            mutableDictionaryJsonData[@"action"] = userInfo[@"gcm.notification.action"];
+            mutableDictionaryJsonData[@"isTrackDriverPopup"] = @"true";
+            mutableDictionaryJsonData[@"title"] = userInfo[@"aps"][@"alert"][@"title"];
+            mutableDictionaryJsonData[@"body"] = userInfo[@"aps"][@"alert"][@"body"];
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:mutableDictionaryJsonData
+                                                               options:0
+                                                                 error:nil];
+            [FCMPlugin.fcmPlugin notifyOfMessage:jsonData];
+        }];
+        
+        UIAlertAction *btnRateDriver = [UIAlertAction actionWithTitle:@"RATE DRIVER" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            //button click event
+            NSMutableDictionary *mutableDictionaryJsonData = [userInfo mutableCopy];     //Make the dictionary mutable to change/add
+            mutableDictionaryJsonData[@"openRatingTapped"] = @"true";
+            mutableDictionaryJsonData[@"action"] = userInfo[@"gcm.notification.action"];
+            mutableDictionaryJsonData[@"title"] = userInfo[@"aps"][@"alert"][@"title"];
+            mutableDictionaryJsonData[@"body"] = userInfo[@"aps"][@"alert"][@"body"];
+            mutableDictionaryJsonData[@"titleHtml"] = userInfo[@"gcm.notification.titleHtml"];
+            mutableDictionaryJsonData[@"bodyHtml"] = userInfo[@"gcm.notification.bodyHtml"];
+            mutableDictionaryJsonData[@"quote_id"] = userInfo[@"gcm.notification.quote_id"];
+            mutableDictionaryJsonData[@"driver_id"] = userInfo[@"gcm.notification.driver_id"];
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:mutableDictionaryJsonData
+                                                               options:0
+                                                                 error:nil];
+            [FCMPlugin.fcmPlugin notifyOfMessage:jsonData];
+        }];
+        
+        [alert addAction:btnOk];
+        
+        if ([isTrackDriverPopup isEqualToString:@"true"]) {
+            [alert addAction:btnTrackDriver];
+        }
+        
+        if ([isRateDriverPopup isEqualToString:@"true"]) {
+            [alert addAction:btnRateDriver];
+            [btnOk setValue:@"CANCEL" forKeyPath:@"title"];
+        }
+        
+        
+        [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
+    }
+}
 
 // [START refresh_token]
 - (void)tokenRefreshNotification:(NSNotification *)notification
