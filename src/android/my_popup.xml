@@ -9,7 +9,7 @@
 
   <LinearLayout
       android:orientation="vertical"
-      android:layout_width="360dp"
+      android:layout_width="match_parent"
       android:layout_height="90dp"
       android:background="@color/secondary_color"
       android:layout_marginTop="10dp"
@@ -27,10 +27,10 @@
 
   <LinearLayout
       android:orientation="vertical"
-      android:layout_width="360dp"
+      android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:layout_weight="1"
-      android:background="@color/primary_color">
+      android:background="@color/primary_color"
+      android:layout_weight="1">
 
     <TextView
         android:layout_width="match_parent"
@@ -42,19 +42,19 @@
         android:hint="YOUR DRIVER ARRIVED!"/>
 
     <ScrollView
-        android:layout_width="360dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
 
       <LinearLayout
-          android:layout_width="360dp"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:orientation="vertical"
           android:layout_marginBottom="10dp"
           >
 
         <TextView
-            android:layout_width="360dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/msg_view"
             android:textColor="@color/secondary_color"
@@ -63,7 +63,8 @@
             android:singleLine="false"
             android:hint="Your centent here"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp"/>
+            android:paddingRight="10dp"
+            />
       </LinearLayout>
     </ScrollView>
 
@@ -71,7 +72,7 @@
 
   <LinearLayout
       android:orientation="vertical"
-      android:layout_width="360dp"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:background="@color/primary_color">
 
@@ -84,13 +85,41 @@
         android:layout_marginLeft="15dp">
     </LinearLayout>
 
-    <Button
-        android:text="@android:string/ok"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_ok"
-        android:background="@android:color/transparent"
-        android:textColor="@color/secondary_color"/>
+        android:layout_weight="1">
+
+      <Button
+          android:text="@android:string/ok"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/btn_ok"
+          android:background="@android:color/transparent"
+          android:textColor="@color/secondary_color"
+          android:layout_weight="0.5"/>
+
+      <Button
+          android:text="Track driver"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/btn_open_tracking"
+          android:layout_weight="0.5"
+          android:background="@color/primary_color"
+          android:textColor="@color/secondary_color"
+          android:visibility="visible"/>
+
+      <Button
+          android:text="Rate Driver"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/btn_rate_driver"
+          android:layout_weight="0.5"
+          android:background="@color/primary_color"
+          android:textColor="@color/secondary_color"
+          android:visibility="visible"/>
+
+    </LinearLayout>
   </LinearLayout>
 
 </LinearLayout>

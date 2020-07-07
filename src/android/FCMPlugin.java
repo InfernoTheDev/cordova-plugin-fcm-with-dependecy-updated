@@ -130,7 +130,7 @@ public class FCMPlugin extends CordovaPlugin {
 			for (String key : payload.keySet()) {
 			    jo.put(key, payload.get(key));
 				Log.d(TAG, "\tpayload: " + key + " => " + payload.get(key));
-            }
+			}
 			String callBack = "javascript:" + notificationCallBack + "(" + jo.toString() + ")";
 			if(notificationCallBackReady && gWebView != null){
 				Log.d(TAG, "\tSent PUSH to view: " + callBack);
